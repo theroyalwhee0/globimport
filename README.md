@@ -6,6 +6,10 @@ A library to import modules in Node.js using glob syntax.
 This library does not support ESModules.
 
 
+## Typescript
+When using globimport with Typescript the imported modules are of type unknown.
+
+
 ## Installation
 `npm install @theroyalwhee0/globimport`  
 
@@ -31,6 +35,6 @@ Running ```npm run test``` will run the test suite. Running ```npm run test-watc
 
 
 ## Legal & License
-Copyright 2022 Adam Mill
+Copyright 2023 Adam Mill
 
 This library is released under Apache 2 license. See [LICENSE](https://github.com/theroyalwhee0/globimport/blob/main/LICENSE) for more details.
