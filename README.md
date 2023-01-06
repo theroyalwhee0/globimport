@@ -14,6 +14,19 @@ When using globimport with Typescript the imported modules are of type unknown.
 `npm install @theroyalwhee0/globimport`  
 
 
+## Usage
+`globImportSync(<glob>, [filter], [options])`
+
+- `glob` is [glob](https://www.npmjs.com/package/glob) string that is used to match paths in node_modules.
+- `filter` is a filter function that is called for each imported module. If the filter returns `true` then the modules in kept, otherwise it is dropped.
+- `options`
+    - `exclude` - A list of modules to exclude from the glob by name.
+    - `excludeDefinitelyTyped` - Exclude Definitely Typed modules ('@types/*'). Defaults to true.
+    - `globOptions` - Options passed directy to 'glob'.
+
+Also see `examples/` and `test/`.
+
+
 ## Examples
 ```ts
 import { globImportSync } from '@theroyalwhee0/globimport';
@@ -22,7 +35,6 @@ const modules = globImportSync('**/goose-*');
 const moduleCount = Object.keys(modules).length;
 console.info(`[INFO ] Matched ${moduleCount} Modules:`, ...Object.keys(modules));
 ```
-
 
 ## Testing.
 Running ```npm run test``` will run the test suite. Running ```npm run test-watch``` will run the test suite in watch mode.

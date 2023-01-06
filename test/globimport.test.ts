@@ -39,7 +39,15 @@ describe('globImportSync', () => {
         const modules = globImportSync('@typescript-eslint/*');
         expect(modules).to.be.an('object');
         const keys = Object.keys(modules);
-        expect(keys.length).to.be.greaterThan(2);
+        expect(keys).to.include('@typescript-eslint/utils');
+    });
+    it('should support excluding modules', () => {
+        const modules = globImportSync('@typescript-eslint/*', undefined, {
+            exclude: ['@typescript-eslint/utils'],
+        });
+        expect(modules).to.be.an('object');
+        const keys = Object.keys(modules);
+        expect(keys).to.not.include('@typescript-eslint/utils');
     });
     it('should match a glob with filter', () => {
         const modules = globImportSync('@typescript-eslint/*', (_) => {

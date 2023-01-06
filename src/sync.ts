@@ -14,6 +14,7 @@ import { GlobImportFilter, GlobImportOptions, PACKAGE_JSON, re_definitelyTyped }
 export function globImportSync(pattern: string, filter?: GlobImportFilter, options?: GlobImportOptions): Record<string, unknown> {
     const globOptions = options?.globOptions ?? {};
     const excludeDefinitelyTyped = options?.excludeDefinitelyTyped ?? true;
+    const excludeModules = options?.exclude ?? [];
     const modules: Record<string, unknown> = {};
     const nodePath = process?.env?.NODE_PATH ?? '';
     const pathPaths = nodePath.split(path.delimiter);
@@ -33,11 +34,14 @@ export function globImportSync(pattern: string, filter?: GlobImportFilter, optio
             }
             const moduleName = path.relative(searchFolder, moduleFolder);
             const re_module = /^([^/\\]+|@[^/\\]+\/[^/\\]+)$/i;
-            if (!re_module.test(moduleName)) {
+            if (
                 // Exclude things that aren't like 'modulename' or '@example/modulename'.
-                continue;
-            } else if (excludeDefinitelyTyped && re_definitelyTyped.test(moduleName)) {
+                (!re_module.test(moduleName)) ||
                 // Exclude Definitely Typed modules '@types/*'.
+                (excludeDefinitelyTyped && re_definitelyTyped.test(moduleName)) ||
+                // Exclude anything in the exclude list.
+                (excludeModules.includes(moduleName))
+            ) {
                 continue;
             }
             let loadedModule: unknown;

@@ -19,6 +19,7 @@ const globimport_1 = require("./globimport");
 function globImportSync(pattern, filter, options) {
     const globOptions = options?.globOptions ?? {};
     const excludeDefinitelyTyped = options?.excludeDefinitelyTyped ?? true;
+    const excludeModules = options?.exclude ?? [];
     const modules = {};
     const nodePath = process?.env?.NODE_PATH ?? '';
     const pathPaths = nodePath.split(node_path_1.default.delimiter);
@@ -38,12 +39,13 @@ function globImportSync(pattern, filter, options) {
             }
             const moduleName = node_path_1.default.relative(searchFolder, moduleFolder);
             const re_module = /^([^/\\]+|@[^/\\]+\/[^/\\]+)$/i;
-            if (!re_module.test(moduleName)) {
-                // Exclude things that aren't like 'modulename' or '@example/modulename'.
-                continue;
-            }
-            else if (excludeDefinitelyTyped && globimport_1.re_definitelyTyped.test(moduleName)) {
+            if (
+            // Exclude things that aren't like 'modulename' or '@example/modulename'.
+            (!re_module.test(moduleName)) ||
                 // Exclude Definitely Typed modules '@types/*'.
+                (excludeDefinitelyTyped && globimport_1.re_definitelyTyped.test(moduleName)) ||
+                // Exclude anything in the exclude list.
+                (excludeModules.includes(moduleName))) {
                 continue;
             }
             let loadedModule;

@@ -5,7 +5,8 @@ export declare const PACKAGE_JSON = "package.json";
  * Glob Import options.
  */
 export type GlobImportOptions = {
-    excludeDefinitelyTyped: boolean;
+    exclude?: string[];
+    excludeDefinitelyTyped?: boolean;
     globOptions?: glob.IOptions;
 };
 /**

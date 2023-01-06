@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.2] - 2023-01-06
+### Added
+- Added Usage to readme.
+- Add `exclude` option to `globImportSync`.
 
 ## [0.0.1] - 2023-01-05
 ### Added

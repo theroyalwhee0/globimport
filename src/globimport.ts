@@ -7,7 +7,8 @@ export const PACKAGE_JSON = 'package.json';
  */
 
 export type GlobImportOptions = {
-    excludeDefinitelyTyped: boolean; // Defaults to true.
+    exclude?: string[],
+    excludeDefinitelyTyped?: boolean; // Defaults to true.
     globOptions?: glob.IOptions;
 };
 /**
