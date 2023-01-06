@@ -1,4 +1,4 @@
-# Glob Import - @theroyalwhee0/globimport
+# GlobImport - @theroyalwhee0/globimport
 
 ## What is this?
 A library to import modules in Node.js using glob syntax.
