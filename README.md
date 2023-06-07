@@ -18,7 +18,7 @@ When using globimport with Typescript the imported modules are of type unknown.
 `globImportSync(<glob>, [filter], [options])`
 
 - `glob` is [glob](https://www.npmjs.com/package/glob) string that is used to match paths in node_modules.
-- `filter` is a filter function that is called for each imported module. If the filter returns `true` then the modules in kept, otherwise it is dropped.
+- `filter` is a filter function that is called for each imported module. If the filter returns `true` then the module is kept, otherwise it is dropped.
 - `options`
     - `exclude` - A list of modules to exclude from the glob by name.
     - `excludeDefinitelyTyped` - Exclude Definitely Typed modules ('@types/*'). Defaults to true.
